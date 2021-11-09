@@ -1,0 +1,15 @@
+#!/bin/bash
+#BATCH --job-name=torch_benchmark
+#SBATCH --account=Project_2005083
+#SBATCH --partition=gpusmall
+#SBATCH --time=02:00:00
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=32
+#SBATCH --mem-per-cpu=8000
+#SBATCH --gres=gpu:a100:1
+#SBATCH --output=./out_TORCH.log
+module purge
+module load pytorch/1.9
+
+
+srun python3 benchmark_pytorch.py --num-cpus $SLURM_CPUS_PER_TASK
